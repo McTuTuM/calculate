@@ -6,16 +6,16 @@ import time
 
 class Math_calcul:
     def plus(a, b):
-        return int(a) + int(b)
+        return float(a) + float(b)
         
     def minus(a, b):
-        return int(a) - int(b)
+        return float(a) - float(b)
 
     def division(a, b):
         return float(a) / float(b)
 
     def multiplication(a, b):
-        return int(a) * int(b)
+        return float(a) * float(b)
 
 
 class Window(Ui_MainWindow, QtWidgets.QMainWindow):
@@ -26,7 +26,7 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.add_functions()
 
-        self.btn_zero.hide()
+        # self.btn_zero.hide()
 
     def add_functions(self):
         self.btn_zero.clicked.connect(lambda: self.write_namber(self.btn_zero.text(), check = 0))
@@ -164,6 +164,6 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
                 perem1.pop(ind)
                 perem1[ind] = res1
                 res1 = 0
-        return perem1[0]
+        return int(perem1[0]) if perem1[0].is_integer() else round(perem1[0], 12)
 
 
