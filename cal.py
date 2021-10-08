@@ -4,6 +4,20 @@ from calctest import Ui_MainWindow
 import sys
 import time
 
+class Math_calcul:
+    def plus(a, b):
+        return int(a) + int(b)
+        
+    def minus(a, b):
+        return int(a) - int(b)
+
+    def division(a, b):
+        return float(a) / float(b)
+
+    def multiplication(a, b):
+        return int(a) * int(b)
+
+
 class Window(Ui_MainWindow, QtWidgets.QMainWindow):
     def __init__(self):
         self.s = False
@@ -94,24 +108,66 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
             if t2 - self.t1 < 1:
                 self.ui.textBrowser.clear()
             self.attempt = not self.attempt
-
-
     def results(self):
-        if self.s == False:
-            # time.sleep(2)
-            self.ui.label.setText(" ERROR")
-            # self.ui.label.setText(" ")
-        else:
-            res = eval(self.ui.label.text())
-            self.ui.textBrowser.append(self.ui.label.text() + " = " + str(res))
-            self.ui.label.setText(" " + str(res))
+        res = self.myeval(self.ui.label.text())
+        self.ui.textBrowser.append(self.ui.label.text() + " = " + str(res))
+        self.ui.label.setText(" " + str(res))
 
-    # def evali(self, number):
-    #     res = ""
-    #     symvls = {"/": "/", "*": "*", "+" :"+"}
-    #     for i in number:
-    #         if i != "":
-    #             res += i  
+
+    def myeval(self, number):
+        perem1 = []
+        a = [] 
+        count = 0
+        symvls = {"/": "/", 
+                "*": "*",
+                "+":'+',
+                "-": "-"}
+        symvls1 = []
+        a = (number.split())
+        for i in a:
+            if i in symvls:
+                symvls1.append(i)
+                count += 1 
+            elif i.isdigit :
+                perem1.append(i)
+        print(perem1)
+
+        print(symvls1)
+
+        for i in range(0, count):
+
+            if "*" in symvls1 or "/" in symvls1:
+                if "/" in symvls1:
+                    ind = symvls1.index("/")
+                    res1 = Math_calcul.division(perem1[ind], perem1[ind + 1])
+                    symvls1.pop(ind)
+                    perem1.pop(ind)
+                    perem1[ind] = res1
+                    res1 = 0
+                else:
+                    ind = symvls1.index("*")
+                    res1 = Math_calcul.multiplication(perem1[ind], perem1[ind + 1])
+                    symvls1.pop(ind)
+                    perem1.pop(ind)
+                    perem1[ind] = res1
+                    res1 = 0
+
+            elif "+" in symvls1 :
+                ind = symvls1.index("+")
+                res1 = Math_calcul.plus(perem1[ind], perem1[ind + 1])
+                symvls1.pop(ind)
+                perem1.pop(ind)
+                perem1[ind] = res1
+                res1 = 0
+            elif "-" in symvls1 :
+                ind = symvls1.index("-")
+                res1 = Math_calcul.minus(perem1[ind], perem1[ind + 1])
+                symvls1.pop(ind)
+                perem1.pop(ind)
+                perem1[ind] = res1
+                res1 = 0
+        return perem1[0]
+
 
 if __name__ == "__main__":   
     app = QtWidgets.QApplication(sys.argv)
