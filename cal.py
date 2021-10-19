@@ -12,7 +12,11 @@ class Math_calcul:
         return float(a) - float(b)
 
     def division(a, b):
-        return float(a) / float(b)
+        try:
+           c = float(a) / float(b)
+        except ZeroDivisionError:
+            c = 0
+        return float(c)
 
     def multiplication(a, b):
         return float(a) * float(b)
