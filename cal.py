@@ -66,6 +66,7 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
             print("Код:", e.key(), ", текст:", e.text())
         elif e.type() == QtCore.QEvent.Close:
             print("Вы закрыли окно")
+            
         # if self.add_functions:
             # if self.label.text() == " ERROR":
             #     self.label.setText(" ")
@@ -135,7 +136,11 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
                 count += 1 
             elif i.isdigit :
                 perem1.append(i)
-
+        if len(symvls1) == len(perem1):
+            if symvls1[count - 1] == "-" or symvls1[count - 1] == "+":
+                perem1.append(0)
+            elif symvls1[count - 1] == "/" or symvls1[count - 1] == "*":
+                perem1.append(1)
         for i in range(0, count):
 
             if "*" in symvls1 or "/" in symvls1:
