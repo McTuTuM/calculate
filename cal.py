@@ -67,14 +67,6 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
         elif e.type() == QtCore.QEvent.Close:
             print("Вы закрыли окно")
             
-        # if self.add_functions:
-            # if self.label.text() == " ERROR":
-            #     self.label.setText(" ")
-            
-        # elif e.type() == QtCore.QEvent.MouseButtonPress:
-        #     if self.label.text() == " ERROR":
-        #         self.label.setText(" ")
-        #         print("*----------------------------")
         return QWidget.event(self, e)
 
     def del_number(self):
@@ -85,9 +77,7 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
             text = text[:lenth - 3]  
             self.s = True
         else:
-            if lenth <= 1:
-                pass
-            else:
+            if lenth > 1:
                 text = text[:lenth - 1]
                 self.s = True
         self.label.setText(text)
@@ -173,6 +163,9 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
                 perem1.pop(ind)
                 perem1[ind] = res1
                 res1 = 0
+        # if perem1[0].is_float():
         return int(perem1[0]) if perem1[0].is_integer() else round(perem1[0], 12)
+        # else:
+        #     return str(perem1[0])
 
 
