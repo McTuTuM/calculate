@@ -33,20 +33,20 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
         # self.btn_zero.hide()
 
     def add_functions(self):
-        self.btn_zero.clicked.connect(lambda: self.write_namber(self.btn_zero.text(), check = 0))
-        self.btn_1.clicked.connect(lambda: self.write_namber(self.btn_1.text(), check = 0))
-        self.btn_2.clicked.connect(lambda: self.write_namber(self.btn_2.text(), check = 0))
-        self.btn_3.clicked.connect(lambda: self.write_namber(self.btn_3.text(), check = 0))
-        self.btn_4.clicked.connect(lambda: self.write_namber(self.btn_4.text(), check = 0))
-        self.btn_5.clicked.connect(lambda: self.write_namber(self.btn_5.text(), check = 0))
-        self.btn_6.clicked.connect(lambda: self.write_namber(self.btn_6.text(), check = 0))
-        self.btn_7.clicked.connect(lambda: self.write_namber(self.btn_7.text(), check = 0))
-        self.btn_8.clicked.connect(lambda: self.write_namber(self.btn_8.text(), check = 0))
-        self.btn_9.clicked.connect(lambda: self.write_namber(self.btn_9.text(), check = 0))
-        self.btn_plus.clicked.connect(lambda: self.write_namber(self.btn_plus.text(), check = 1))
-        self.btn_minus.clicked.connect(lambda: self.write_namber(self.btn_minus.text(), check = 1))
-        self.btn_division.clicked.connect(lambda: self.write_namber(self.btn_division.text(), check = 1))
-        self.btn_multiplication.clicked.connect(lambda: self.write_namber(self.btn_multiplication.text(), check = 1))
+        self.btn_zero.clicked.connect(lambda: self.write_number(self.btn_zero.text(), check = 0))
+        self.btn_1.clicked.connect(lambda: self.write_number(self.btn_1.text(), check = 0))
+        self.btn_2.clicked.connect(lambda: self.write_number(self.btn_2.text(), check = 0))
+        self.btn_3.clicked.connect(lambda: self.write_number(self.btn_3.text(), check = 0))
+        self.btn_4.clicked.connect(lambda: self.write_number(self.btn_4.text(), check = 0))
+        self.btn_5.clicked.connect(lambda: self.write_number(self.btn_5.text(), check = 0))
+        self.btn_6.clicked.connect(lambda: self.write_number(self.btn_6.text(), check = 0))
+        self.btn_7.clicked.connect(lambda: self.write_number(self.btn_7.text(), check = 0))
+        self.btn_8.clicked.connect(lambda: self.write_number(self.btn_8.text(), check = 0))
+        self.btn_9.clicked.connect(lambda: self.write_number(self.btn_9.text(), check = 0))
+        self.btn_plus.clicked.connect(lambda: self.write_number(self.btn_plus.text(), check = 1))
+        self.btn_minus.clicked.connect(lambda: self.write_number(self.btn_minus.text(), check = 1))
+        self.btn_division.clicked.connect(lambda: self.write_number(self.btn_division.text(), check = 1))
+        self.btn_multiplication.clicked.connect(lambda: self.write_number(self.btn_multiplication.text(), check = 1))
         self.btn_equ.clicked.connect(self.results)
         self.btn_clear.clicked.connect(lambda: self.delete())
         self.btn_backspace.clicked.connect(lambda:self.del_number())
@@ -56,14 +56,14 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
             if self.label.text() == " ERROR":
                 self.label.setText(" ")
             if 48 <= e.key() <= 57:
-                self.write_namber(e.text(), check = 0)
+                self.write_number(e.text(), check = 0)
             elif e.key() == 47 or e.key() == 42 or e.key() == 45 or e.key() == 43:
-                self.write_namber((" " + e.text() + " "), check = 1)
+                self.write_number((" " + e.text() + " "), check = 1)
             elif e.key() == 16777219:
                 self.del_number()
             elif e.key() == 16777221:
                 self.results()
-            print("Код:", e.key(), ", текст:", e.text())
+            print(f"Код: {e.key()}, текст: {e.text()}")
         elif e.type() == QtCore.QEvent.Close:
             print("Вы закрыли окно")
             
@@ -83,7 +83,7 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
         self.label.setText(text)
 
 
-    def write_namber(self, number, check):
+    def write_number(self, number, check):
         if check == 0:
             self.s = True
         if self.s:
@@ -105,12 +105,12 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
                 self.textBrowser.clear()
             self.attempt = not self.attempt
     def results(self):
-        res = self.myeval(self.label.text())
+        res = self.my_eval(self.label.text())
         self.textBrowser.append(self.label.text() + " = " + str(res))
         self.label.setText(" " + str(res))
 
 
-    def myeval(self, number):
+    def my_eval(self, number):
         perem1 = []
         a = [] 
         count = 0
