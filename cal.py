@@ -115,9 +115,9 @@ class Window(Ui_MainWindow, QtWidgets.QMainWindow):
         a = [] 
         count = 0
         symvls = {"/": "/", 
-                "*": "*",
-                "+":'+',
-                "-": "-"}
+                  "*": "*",
+                  "+": "+",
+                  "-": "-"}
         symvls1 = []
         a = (number.split())
         for i in a:
